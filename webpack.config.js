@@ -5,7 +5,7 @@ const webpack = require('webpack');
 module.exports = {
   mode: 'development',
   // стартовая точка нашего приложения
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  entry: path.resolve(__dirname, 'src', 'index.ts'),
   // настройки куда и как мы будем делать сборку нашего приложения
   output: {
     // главный файл сборки нашего приложения
@@ -21,5 +21,17 @@ module.exports = {
       template: path.resolve(__dirname, 'public', 'index.html'),
     }),
     new webpack.ProgressPlugin(),
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ],
+  },
 }
